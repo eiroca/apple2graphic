@@ -2,7 +2,7 @@ object fmMain: TfmMain
   Left = 0
   Top = 0
   Caption = 'Apple Graphics'
-  ClientHeight = 507
+  ClientHeight = 527
   ClientWidth = 655
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
@@ -19,7 +19,7 @@ object fmMain: TfmMain
     Left = 0
     Top = 0
     Width = 655
-    Height = 507
+    Height = 527
     Align = alClient
     AutoSize = True
     OnMouseDown = iImgMouseDown
@@ -53,7 +53,7 @@ object fmMain: TfmMain
       end
     end
     object Image1: TMenuItem
-      Caption = '&Apple ]['
+      Caption = '&Picture'
       object LoadHGR1: TMenuItem
         Caption = 'Load &HGR'
         OnClick = LoadHGR1Click
@@ -66,13 +66,16 @@ object fmMain: TfmMain
         Caption = 'Load &GS'
         OnClick = LoadGS1Click
       end
+    end
+    object Shape2: TMenuItem
+      Caption = '&Shape'
       object DrawShape1: TMenuItem
         Caption = 'Draw &Shape'
         OnClick = DrawShape1Click
       end
     end
     object Shape1: TMenuItem
-      Caption = '&Sprite'
+      Caption = 'Sp&rite'
       object DrawSprite1: TMenuItem
         Caption = '&Load sprite'
         OnClick = DrawSprite1Click

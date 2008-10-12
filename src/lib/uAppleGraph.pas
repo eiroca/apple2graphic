@@ -875,7 +875,7 @@ begin
 
 end;
 
-begin
+initialization
   InitAplGraph;
 end.
 

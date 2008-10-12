@@ -45,6 +45,7 @@ type
     Mergesprite1: TMenuItem;
     N2: TMenuItem;
     miAbout: TMenuItem;
+    Shape2: TMenuItem;
     procedure FormCreate(Sender: TObject);
     procedure iImgMouseDown(Sender: TObject; Button: TMouseButton;
       Shift: TShiftState; X, Y: Integer);
@@ -102,20 +103,6 @@ begin
   end;
 end;
 
-procedure TfmMain.DrawSprite1Click(Sender: TObject);
-begin
-  setFilter('Sprite Files|*.spr|All files|*.*');
-  if dlOpen.Execute then begin
-    ag.bitmap.Width:= 640;
-    ag.bitmap.Height:= 480;
-    ag.Clear;
-    ag.LoadSprites(dlOpen.FileName, false);
-    ag.ResetPos(1, 1, ag.bitmap.Width);
-    ag.DrawSprites;
-    iImg.Picture.Assign(ag.bitmap);
-  end;
-end;
-
 procedure TfmMain.Exit1Click(Sender: TObject);
 begin
   Close;
@@ -162,6 +149,20 @@ begin
   setFilter('HGR Files|*.hgr|All files|*.*');
   if dlOpen.Execute then begin
     ag.DrawHGR(dlOpen.FileName, mdBW);
+    iImg.Picture.Assign(ag.bitmap);
+  end;
+end;
+
+procedure TfmMain.DrawSprite1Click(Sender: TObject);
+begin
+  setFilter('Sprite Files|*.spr|All files|*.*');
+  if dlOpen.Execute then begin
+    ag.bitmap.Width:= 640;
+    ag.bitmap.Height:= 480;
+    ag.Clear;
+    ag.LoadSprites(dlOpen.FileName, false);
+    ag.ResetPos(1, 1, ag.bitmap.Width);
+    ag.DrawSprites;
     iImg.Picture.Assign(ag.bitmap);
   end;
 end;
