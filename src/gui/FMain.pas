@@ -82,7 +82,7 @@ end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
 begin
-  About('AppleGraphic 2006');
+  About(Application.Title);
 end;
 
 procedure TfmMain.DrawShape1Click(Sender: TObject);
