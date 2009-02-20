@@ -71,7 +71,7 @@ var
 
 implementation
 
-uses FAbout;
+uses FAboutGPL;
 
 {$R *.dfm}
 
@@ -82,7 +82,7 @@ end;
 
 procedure TfmMain.miAboutClick(Sender: TObject);
 begin
-  About(Application.Title);
+  AboutGPL(Application.Title);
 end;
 
 procedure TfmMain.DrawShape1Click(Sender: TObject);
