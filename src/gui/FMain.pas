@@ -97,7 +97,7 @@ begin
     ag.Clear;
     NumShp:= ag.LoadShape(dlOpen.FileName);
     for i:= 0 to NumShp-1 do begin
-      ag.Draw(i+1, (i mod 10)*20+10, (i div 10)*20+10);
+      ag.Draw(i+1, (i mod 10)*20+20, (i div 10)*20+20);
     end;
     iImg.Picture.Assign(ag.bitmap);
   end;

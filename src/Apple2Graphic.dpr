@@ -16,7 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 (* Author :  Enrico Croce *)
-program Apple2Graphic2006;
+program Apple2Graphic;
 
 uses
   Forms,
