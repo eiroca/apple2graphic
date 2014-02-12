@@ -1,0 +1,7 @@
+Name       : Apple][ Graphic
+Description: Programs and library to draw old Apple ][ graphics formats. Support for HGR, DHGR and Apple 2 GS SHR ($C1/PIC format) format with export to BMP/PNG. Support also for apple shape.
+OS         : Win32 / Mac OS X
+Type       : GUI
+Language   : FreePascal/Lazarus 1.0.14
+Dependency : -
+Version    : 1.1.0

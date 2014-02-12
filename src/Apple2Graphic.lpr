@@ -1,6 +1,5 @@
 (* GPL > 3.0
-AppleGraphic2006
-Copyright (C) 1996-2008 eIrOcA Enrico Croce & Simona Burzio
+Copyright (C) 1996-2014 eIrOcA Enrico Croce & Simona Burzio
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -18,10 +17,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 (* Author :  Enrico Croce *)
 program Apple2Graphic;
 
+{$MODE Delphi}
+
 uses
   Forms,
-  FMain in 'gui\FMain.pas' {fmMain},
-  uAppleGraph in 'lib\uAppleGraph.pas';
+  Interfaces,
+  FMain in 'gui\FMain.pas' {fmMain};
 
 {$R *.res}
 
@@ -29,4 +30,4 @@ begin
   Application.Initialize;
   Application.CreateForm(TfmMain, fmMain);
   Application.Run;
-end.
+end.

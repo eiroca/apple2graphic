@@ -1,0 +1,132 @@
+object fmMain: TfmMain
+  Left = 255
+  Height = 336
+  Top = 129
+  Width = 511
+  Caption = 'Apple Graphic'
+  ClientHeight = 316
+  ClientWidth = 511
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Menu = MainMenu1
+  OnCreate = FormCreate
+  OnDestroy = FormDestroy
+  Position = poDefault
+  LCLVersion = '1.0.14.0'
+  object iImg: TImage
+    Left = 0
+    Height = 316
+    Top = 0
+    Width = 511
+    Align = alClient
+    AutoSize = True
+  end
+  object MainMenu1: TMainMenu
+    left = 56
+    top = 112
+    object File1: TMenuItem
+      Caption = '&File'
+      object miSave: TMenuItem
+        Caption = '&Save picture'
+        Enabled = False
+        OnClick = miSaveClick
+      end
+      object N1: TMenuItem
+        Caption = '-'
+      end
+      object miAbout: TMenuItem
+        Caption = '&About'
+        OnClick = miAboutClick
+      end
+      object N2: TMenuItem
+        Caption = '-'
+      end
+      object Exit1: TMenuItem
+        Caption = 'E&xit'
+        OnClick = Exit1Click
+      end
+    end
+    object Image1: TMenuItem
+      Caption = '&Picture'
+      object miLoadHGR: TMenuItem
+        Caption = 'Load &HGR'
+        OnClick = miLoadHGRClick
+      end
+      object miLoadDHR: TMenuItem
+        Caption = 'Load &DHR'
+        OnClick = miLoadDHRClick
+      end
+      object miLoadSHR: TMenuItem
+        Caption = 'Load &SHR'
+        OnClick = miLoadSHRClick
+      end
+      object MenuItem1: TMenuItem
+        Caption = '-'
+      end
+      object MenuItem2: TMenuItem
+        Caption = '&Color config'
+        object MenuItemAuto: TMenuItem
+          Caption = 'Automatic'
+          Checked = True
+          RadioItem = True
+          OnClick = ItemModeClick
+        end
+        object MenuItem4: TMenuItem
+          Tag = 1
+          Caption = 'Black && White'
+          RadioItem = True
+          OnClick = ItemModeClick
+        end
+        object MenuItem5: TMenuItem
+          Tag = 2
+          Caption = 'Color'
+          RadioItem = True
+          OnClick = ItemModeClick
+        end
+        object MenuItem6: TMenuItem
+          Tag = 3
+          Caption = 'Mixed'
+          GroupIndex = 1
+          RadioItem = True
+          OnClick = ItemModeClick
+        end
+      end
+    end
+    object Shape2: TMenuItem
+      Caption = '&Shape'
+      object DrawShape1: TMenuItem
+        Caption = 'Draw &Shape'
+        OnClick = DrawShape1Click
+      end
+    end
+    object Shape1: TMenuItem
+      Caption = 'Sp&rite'
+      object DrawSprite1: TMenuItem
+        Caption = '&Load sprite'
+        OnClick = DrawSpriteClick
+      end
+      object miReOrderSprite: TMenuItem
+        Caption = '&Reorder'
+        OnClick = ReorderSpriteClick
+      end
+      object miMergeSprite: TMenuItem
+        Caption = '&Merge sprite'
+        OnClick = MergespriteClick
+      end
+    end
+  end
+  object dlSave: TSaveDialog
+    Title = 'Save picture'
+    DefaultExt = '.png'
+    Filter = 'PNG|*.png|Bitmap|*.bmp'
+    Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
+    left = 56
+    top = 208
+  end
+  object dlOpen: TOpenDialog
+    left = 160
+    top = 208
+  end
+end

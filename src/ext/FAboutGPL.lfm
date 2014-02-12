@@ -1,0 +1,42 @@
+object fmAbout: TfmAbout
+  Left = 410
+  Height = 234
+  Top = 211
+  Width = 413
+  BorderStyle = bsDialog
+  Caption = 'About'
+  ClientHeight = 234
+  ClientWidth = 413
+  Color = clBtnFace
+  Font.Color = clWindowText
+  Font.Height = -11
+  Font.Name = 'Tahoma'
+  Position = poMainFormCenter
+  LCLVersion = '1.0.14.0'
+  object Label1: TLabel
+    Left = 5
+    Height = 187
+    Top = 5
+    Width = 400
+    Alignment = taCenter
+    AutoSize = False
+    Caption = 'Copyright (C) 1996-2014 eIrOcA Enrico Croce && Simona Burzio  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.  You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.'
+    Font.Color = clWindowText
+    Font.Height = -12
+    ParentColor = False
+    ParentFont = False
+    WordWrap = True
+    OnClick = Label1Click
+  end
+  object BitBtn1: TBitBtn
+    Left = 176
+    Height = 25
+    Top = 200
+    Width = 72
+    Default = True
+    DefaultCaption = True
+    Kind = bkOK
+    ModalResult = 1
+    TabOrder = 0
+  end
+end

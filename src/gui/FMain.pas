@@ -1,5 +1,5 @@
 (* GPL > 3.0
-Copyright (C) 1996-2008 eIrOcA Enrico Croce & Simona Burzio
+Copyright (C) 1996-2014 eIrOcA Enrico Croce & Simona Burzio
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -22,46 +22,59 @@ unit FMain;
 interface
 
 uses
-  uAppleGraph, SysUtils,
-  Forms, Menus, Controls, StdCtrls, Classes, ExtCtrls, Dialogs;
+  uAppleGraphicHelper, Classes, SysUtils, Graphics,
+  Forms, Menus, Controls, StdCtrls, ExtCtrls, Dialogs;
 
 type
+
+  { TfmMain }
+
   TfmMain = class(TForm)
     iImg: TImage;
     MainMenu1: TMainMenu;
     File1: TMenuItem;
+    MenuItem1: TMenuItem;
+    MenuItem2: TMenuItem;
+    miReOrderSprite: TMenuItem;
+    MenuItemAuto: TMenuItem;
+    MenuItem4: TMenuItem;
+    MenuItem5: TMenuItem;
+    MenuItem6: TMenuItem;
     N1: TMenuItem;
     Exit1: TMenuItem;
-    SaveBMP1: TMenuItem;
+    miSave: TMenuItem;
     dlSave: TSaveDialog;
     Image1: TMenuItem;
-    LoadHGR1: TMenuItem;
-    LoadDGR1: TMenuItem;
-    LoadGS1: TMenuItem;
+    miLoadHGR: TMenuItem;
+    miLoadDHR: TMenuItem;
+    miLoadSHR: TMenuItem;
     Shape1: TMenuItem;
     DrawShape1: TMenuItem;
     DrawSprite1: TMenuItem;
     dlOpen: TOpenDialog;
-    Mergesprite1: TMenuItem;
+    miMergeSprite: TMenuItem;
     N2: TMenuItem;
     miAbout: TMenuItem;
     Shape2: TMenuItem;
     procedure FormCreate(Sender: TObject);
-    procedure iImgMouseDown(Sender: TObject; Button: TMouseButton;
-      Shift: TShiftState; X, Y: Integer);
-    procedure SaveBMP1Click(Sender: TObject);
-    procedure LoadHGR1Click(Sender: TObject);
-    procedure LoadGS1Click(Sender: TObject);
-    procedure LoadDGR1Click(Sender: TObject);
+    procedure FormDestroy(Sender: TObject);
+    procedure ItemModeClick(Sender: TObject);
+    procedure ReorderSpriteClick(Sender: TObject);
+     procedure miSaveClick(Sender: TObject);
+    procedure miLoadHGRClick(Sender: TObject);
+    procedure miLoadSHRClick(Sender: TObject);
+    procedure miLoadDHRClick(Sender: TObject);
     procedure DrawShape1Click(Sender: TObject);
-    procedure DrawSprite1Click(Sender: TObject);
-    procedure Mergesprite1Click(Sender: TObject);
+    procedure DrawSpriteClick(Sender: TObject);
+    procedure MergespriteClick(Sender: TObject);
     procedure Exit1Click(Sender: TObject);
     procedure miAboutClick(Sender: TObject);
   private
     { Private declarations }
-    ag: TAppleGraphic;
-    procedure setFilter(f: string);
+    GraphicHelper: TAppleGraphicHelper;
+    ColorConfig: TMenuItem;
+    procedure SetFilter(f: string);
+    procedure View(img: TBitmap);
   public
     { Public declarations }
   end;
@@ -71,36 +84,51 @@ var
 
 implementation
 
-uses FAboutGPL;
+uses
+  FAboutGPL;
 
-{$R *.dfm}
+{$R *.lfm}
+
+procedure TfmMain.FormCreate(Sender: TObject);
+var
+  basePath: string;
+begin
+  GraphicHelper:= TAppleGraphicHelper.Create;
+  ColorConfig:= MenuItemAuto;
+  miReOrderSprite.Enabled:= false;
+  miMergeSprite.Enabled:= false;
+end;
+
+procedure TfmMain.FormDestroy(Sender: TObject);
+begin
+  FreeAndNil(GraphicHelper);
+end;
+
+procedure TfmMain.ItemModeClick(Sender: TObject);
+var
+  item: TMenuItem;
+begin
+  item:= Sender as TMenuItem;
+  ColorConfig.Checked:= false;
+  ColorConfig:= Item;
+  ColorConfig.Checked:= true;
+end;
+
+procedure TfmMain.ReorderSpriteClick(Sender: TObject);
+begin
+  View(GraphicHelper.ReorderSprites());
+end;
 
 procedure TfmMain.setFilter(f: string);
 begin
-  dlOpen.Filter:= f;
+  dlOpen.Filter := f;
 end;
 
-procedure TfmMain.miAboutClick(Sender: TObject);
+procedure TfmMain.View(img: TBitmap);
 begin
-  AboutGPL(Application.Title);
-end;
-
-procedure TfmMain.DrawShape1Click(Sender: TObject);
-var
-  NumShp: word;
-  i: integer;
-begin
-  setFilter('Shape Files|*.shp|All files|*.*');
-  if dlOpen.Execute then begin
-    ag.bitmap.Width:= 280;
-    ag.bitmap.Height:= 192;
-    ag.Clear;
-    NumShp:= ag.LoadShape(dlOpen.FileName);
-    for i:= 0 to NumShp-1 do begin
-      ag.Draw(i+1, (i mod 10)*20+20, (i div 10)*20+20);
-    end;
-    iImg.Picture.Assign(ag.bitmap);
-  end;
+  miSave.Enabled:= true;
+  iImg.Picture.Assign(img);
+  img.Free;
 end;
 
 procedure TfmMain.Exit1Click(Sender: TObject);
@@ -108,86 +136,67 @@ begin
   Close;
 end;
 
-procedure TfmMain.FormCreate(Sender: TObject);
-var
-  basePath: string;
+procedure TfmMain.miAboutClick(Sender: TObject);
 begin
-  basePath:= ExtractFilePath(ParamStr(0));
-  ag:= TAppleGraphic.Create(-1);
-  dlOpen.InitialDir:= basePath;
-  dlSave.InitialDir:= basePath;
+  AboutGPL(Application.Title);
 end;
 
-procedure TfmMain.iImgMouseDown(Sender: TObject; Button: TMouseButton;
-  Shift: TShiftState; X, Y: Integer);
+procedure TfmMain.miSaveClick(Sender: TObject);
 begin
-  ag.Draw(3, x, y);
-  iImg.Picture.Assign(ag.bitmap);
-end;
-
-procedure TfmMain.LoadDGR1Click(Sender: TObject);
-begin
-  setFilter('DHR Files|*.dhr|All files|*.*');
-  if dlOpen.Execute then begin
-    ag.DrawDHR(dlOpen.FileName, kdMode1, mdBW);
-    iImg.Picture.Assign(ag.bitmap);
+  if dlSave.Execute then begin
+    iImg.Picture.SaveToFile(dlSave.FileName);
   end;
 end;
 
-procedure TfmMain.LoadGS1Click(Sender: TObject);
-begin
-  setFilter('$C1 Files|*.$C1|All files|*.*');
-  if dlOpen.Execute then begin
-    ag.DrawGS(dlOpen.FileName);
-    iImg.Picture.Assign(ag.bitmap);
-  end;
-  iImg.Picture.Assign(ag.bitmap);
-end;
-
-procedure TfmMain.LoadHGR1Click(Sender: TObject);
+procedure TfmMain.miLoadHGRClick(Sender: TObject);
 begin
   setFilter('HGR Files|*.hgr|All files|*.*');
   if dlOpen.Execute then begin
-    ag.DrawHGR(dlOpen.FileName, mdBW);
-    iImg.Picture.Assign(ag.bitmap);
+     View(GraphicHelper.LoadGraphic(dlOpen.FileName, 1, ColorConfig.Tag));
   end;
 end;
 
-procedure TfmMain.DrawSprite1Click(Sender: TObject);
+procedure TfmMain.miLoadDHRClick(Sender: TObject);
+begin
+  setFilter('DHR Files|*.dhr|All files|*.*');
+  if dlOpen.Execute then begin
+    View(GraphicHelper.LoadGraphic(dlOpen.FileName, 2, ColorConfig.Tag));
+  end;
+end;
+
+procedure TfmMain.miLoadSHRClick(Sender: TObject);
+begin
+  setFilter('SHR ($C1, PIC) Files|*.$C1;*.shr;*.pic|All files|*.*');
+  if dlOpen.Execute then begin
+    View(GraphicHelper.LoadGraphic(dlOpen.FileName, 3, ColorConfig.Tag));
+  end;
+end;
+
+procedure TfmMain.DrawShape1Click(Sender: TObject);
+begin
+  setFilter('Shape Files|*.shp|All files|*.*');
+  if dlOpen.Execute then begin
+    View(GraphicHelper.DrawShapes(dlOpen.FileName));
+  end;
+end;
+
+procedure TfmMain.DrawSpriteClick(Sender: TObject);
 begin
   setFilter('Sprite Files|*.spr|All files|*.*');
   if dlOpen.Execute then begin
-    ag.bitmap.Width:= 640;
-    ag.bitmap.Height:= 480;
-    ag.Clear;
-    ag.LoadSprites(dlOpen.FileName, false);
-    ag.ResetPos(1, 1, ag.bitmap.Width);
-    ag.DrawSprites;
-    iImg.Picture.Assign(ag.bitmap);
+     View(GraphicHelper.DrawSprites(dlOpen.FileName, false));
+     miReOrderSprite.Enabled:= true;
+     miMergeSprite.Enabled:= true;
   end;
 end;
 
-procedure TfmMain.Mergesprite1Click(Sender: TObject);
+procedure TfmMain.MergespriteClick(Sender: TObject);
 begin
-  setFilter('Sprite Files|*.dat|All files|*.*');
+  setFilter('Sprite Files|*.spr|All files|*.*');
   if dlOpen.Execute then begin
-    ag.LoadSprites(dlOpen.FileName, true);
-    ag.ResetPos(1, 1, ag.bitmap.Width);
-    ag.DrawSprites;
-    iImg.Picture.Assign(ag.bitmap);
-  end;
-
-end;
-
-procedure TfmMain.SaveBMP1Click(Sender: TObject);
-var
-  path: string;
-begin
-  if dlSave.Execute then begin
-    path:= dlSave.FileName;
-    ag.bitmap.SaveToFile(path);
+     miSave.Enabled:= true;
+     View(GraphicHelper.DrawSprites(dlOpen.FileName, true));
   end;
 end;
 
 end.
-
