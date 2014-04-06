@@ -1,23 +1,44 @@
-(* Generated automatically with "cito". Do not edit. *)
+// Generated automatically with "cito". Do not edit.
+// GPL > 3.0
+// Copyright (C) 1996-2014 eIrOcA Enrico Croce & Simona Burzio
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+//
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+//
+// You should have received a copy of the GNU General Public License
+// along with this program.  If not, see <http://www.gnu.org/licenses/>.
+//
+//  Author :  Enrico Croce
+//  Library: Draw Apple 2 shapes, HGR, DHR, GS $C1(PIC) images
+//  Version:  1.0.1
+//  Creation Date: 01/09/1996
+//  Last Modify Date: 02/04/2014
+//
+//  NOTE:  Rotation not supported, Scaling and collisions supported
+//
 unit cAppleGraphic;
 
 interface
 
-uses SysUtils, Classes, Math;
+uses SysUtils, Classes;
 
 type
 
   gKind = (
+    /// MAIN - AUX order
     kdMode1,
+    /// AUX - MAIN order
     kdMode2
   );
 
-  gMode = (
-    mdAuto,
-    mdBW,
-    mdColor,
-    mdMixed
-  );
+  gMode = (mdAuto, mdBW, mdColor, mdMixed);
 
   TSize = class;
   TSprite = class;
@@ -27,92 +48,106 @@ type
   ArrayOf_TSprite = array of TSprite;
 
   TAppleGraphic = class(TInterfacedObject)
-    private Height: integer;
-    private Width: integer;
-    private bgColor: integer;
-    private fgColor: integer;
-    private screen: ArrayOf_integer;
-    public constructor Create;
-    public procedure Clear();
-    public function GetHeight(): integer;
-    public function GetPixel(X: integer; Y: integer): integer;
-    public function GetScreen(): ArrayOf_integer;
-    public function GetWidth(): integer;
-    public procedure SetMode(mode: integer);
-    public procedure SetPixel(X: integer; Y: integer; C: integer);
+    private
+      screen: ArrayOf_integer;
+    protected
+      Height: integer;
+      Width: integer;
+      bgColor: integer;
+      fgColor: integer;
+    public
+      constructor Create;
+      procedure Clear();
+      function GetHeight(): integer;
+      function GetPixel(X: integer; Y: integer): integer;
+      function GetScreen(): ArrayOf_integer;
+      function GetWidth(): integer;
+      procedure SetMode(mode: integer);
+      procedure SetPixel(X: integer; Y: integer; C: integer);
   end;
 
   TAppleImage = class(TAppleGraphic)
-    public constructor Create;
-    private function DecodeMode(aType: byte): gMode;
-    private procedure DecodePal(var Pic: ArrayOf_byte; var Pal: ArrayOf_integer);
-    public procedure DrawDHR(var img: ArrayOf_byte; kind: gKind; mode: gMode);
-    public procedure DrawDHRBW(var img: ArrayOf_byte; mainFirst: boolean);
-    public procedure DrawDHRCol(var img: ArrayOf_byte; mainFirst: boolean; solid: boolean);
-    public procedure DrawHGR(var img: ArrayOf_byte; mode: gMode);
-    public procedure DrawHGRBW(var img: ArrayOf_byte);
-    public procedure DrawHGRCol(var img: ArrayOf_byte; solid: boolean);
-    public procedure DrawSHR(var img: ArrayOf_byte);
-    private function GetColor(var Pic: ArrayOf_byte; x: integer; y: integer): byte;
+    protected
+      function DecodeMode(aType: byte): gMode;
+      procedure DecodePal(var Pic: ArrayOf_byte; var Pal: ArrayOf_integer);
+      function GetColor(var Pic: ArrayOf_byte; x: integer; y: integer): byte;
+    public
+      constructor Create;
+      procedure DrawDHR(var img: ArrayOf_byte; kind: gKind; mode: gMode);
+      procedure DrawDHRBW(var img: ArrayOf_byte; mainFirst: boolean);
+      procedure DrawDHRCol(var img: ArrayOf_byte; mainFirst: boolean; solid: boolean);
+      procedure DrawHGR(var img: ArrayOf_byte; mode: gMode);
+      procedure DrawHGRBW(var img: ArrayOf_byte);
+      procedure DrawHGRCol(var img: ArrayOf_byte; solid: boolean);
+      procedure DrawSHR(var img: ArrayOf_byte);
   end;
 
   TAppleShape = class(TAppleGraphic)
-    private Collisions: integer;
-    private Rot: integer;
-    private Scale: integer;
-    private ShTbl: ArrayOf_byte;
-    public constructor Create;
-    public procedure ComputeRect(Shape: integer; rect: TSize);
-    public procedure Draw(Shape: integer; XPos: integer; aYPos: integer);
-    private function GetBaseAddr(Shape: integer): integer;
-    public function GetCollisions(): integer;
-    private procedure InternalDraw(Shape: integer; XPos: integer; aYPos: integer; mask: integer);
-    public function NumShapes(): integer;
-    public procedure SetRotation(rotation: integer);
-    public procedure SetScale(aScale: integer);
-    public procedure SetShape(var source: ArrayOf_byte);
-    public procedure XDraw(Shape: integer; XPos: integer; aYPos: integer);
+    private
+      Collisions: integer;
+      Rot: integer;
+      Scale: integer;
+      ShTbl: ArrayOf_byte;
+    protected
+      function GetBaseAddr(Shape: integer): integer;
+      procedure InternalDraw(Shape: integer; XPos: integer; aYPos: integer; mask: integer);
+    public
+      constructor Create;
+      procedure ComputeRect(Shape: integer; rect: TSize);
+      procedure Draw(Shape: integer; XPos: integer; aYPos: integer);
+      function GetCollisions(): integer;
+      function NumShapes(): integer;
+      procedure SetRotation(rotation: integer);
+      procedure SetScale(aScale: integer);
+      procedure SetShape(var source: ArrayOf_byte);
+      procedure XDraw(Shape: integer; XPos: integer; aYPos: integer);
   end;
 
   TAppleSprite = class(TAppleGraphic)
-    private NumSprites: integer;
-    private Sprites: ArrayOf_TSprite;
-    public constructor Create;
-    public procedure AddSprite(sprite: TSprite);
-    public procedure DeleteSprites();
-    public procedure DrawSprite(s: TSprite);
-    public procedure DrawSprites();
-    public function GetNumSprites(): integer;
-    public function GetSprite(i: integer): TSprite;
-    public procedure ResetPos(sx: integer; sy: integer; MaxX: integer);
+    private
+      NumSprites: integer;
+      Sprites: ArrayOf_TSprite;
+    public
+      constructor Create;
+      procedure AddSprite(sprite: TSprite);
+      procedure DeleteSprites();
+      procedure DrawSprite(s: TSprite);
+      procedure DrawSprites();
+      function GetNumSprites(): integer;
+      function GetSprite(i: integer): TSprite;
+      procedure ResetPos(sx: integer; sy: integer; MaxX: integer);
   end;
 
   TSize = class(TInterfacedObject)
-    private Height: integer;
-    private OffX: integer;
-    private OffY: integer;
-    private Width: integer;
-    public constructor Create;
-    public function GetHeight(): integer;
-    public function GetOffsetX(): integer;
-    public function GetOffsetY(): integer;
-    public function GetWidth(): integer;
+    protected
+      Height: integer;
+      OffX: integer;
+      OffY: integer;
+      Width: integer;
+    public
+      constructor Create;
+      function GetHeight(): integer;
+      function GetOffsetX(): integer;
+      function GetOffsetY(): integer;
+      function GetWidth(): integer;
   end;
 
   TSprite = class(TInterfacedObject)
-    private data: ArrayOf_byte;
-    private h: integer;
-    private w: integer;
-    private x: integer;
-    private y: integer;
-    public constructor Create;
-    public procedure Define(width: integer; height: integer; var def: ArrayOf_byte);
-    public function GetData(): ArrayOf_byte;
-    public function GetHeight(): integer;
-    public function GetWidth(): integer;
-    public function GetX(): integer;
-    public function GetY(): integer;
-    public procedure SetPosition(px: integer; py: integer);
+    protected
+      data: ArrayOf_byte;
+      h: integer;
+      w: integer;
+      x: integer;
+      y: integer;
+    public
+      constructor Create;
+      procedure Define(width: integer; height: integer; var def: ArrayOf_byte);
+      function GetData(): ArrayOf_byte;
+      function GetHeight(): integer;
+      function GetWidth(): integer;
+      function GetX(): integer;
+      function GetY(): integer;
+      procedure SetPosition(px: integer; py: integer);
   end;
 
 var
@@ -197,7 +232,7 @@ begin
     2: begin
       Self.Width:= 320;
       Self.Height:= 200;
-    end
+    end;
     else begin
       Self.Width:= 640;
       Self.Height:= 480;
@@ -221,21 +256,11 @@ var
   mode: gMode;
 begin
   case (aType) of
-    0, 4: begin
-      mode:= gMode.mdBW;
-    end;
-    1, 5: begin
-      mode:= gMode.mdMixed;
-    end;
-    2, 6: begin
-      mode:= gMode.mdBW;
-    end;
-    3, 7: begin
-      mode:= gMode.mdColor;
-    end
-    else begin
-      mode:= gMode.mdMixed;
-    end;
+    0, 4: mode:= gMode.mdBW;
+    1, 5: mode:= gMode.mdMixed;
+    2, 6: mode:= gMode.mdBW;
+    3, 7: mode:= gMode.mdColor;
+    else mode:= gMode.mdMixed;
   end;
   Result:= mode;
 end;
@@ -276,22 +301,20 @@ begin
   end;
   mainFirst:= kind = gKind.kdMode1;
   case (mode) of
-    gMode.mdBW: begin
-      Self.DrawDHRBW(img, mainFirst);
-    end;
-    gMode.mdColor: begin
-      Self.DrawDHRCol(img, mainFirst, true);
-    end;
-    gMode.mdMixed: begin
-      Self.DrawDHRCol(img, mainFirst, false);
-    end;
+    gMode.mdBW: Self.DrawDHRBW(img, mainFirst);
+    gMode.mdColor: Self.DrawDHRCol(img, mainFirst, true);
+    gMode.mdMixed: Self.DrawDHRCol(img, mainFirst, false);
   end;
 end;
 
 procedure TAppleImage.DrawDHRBW(var img: ArrayOf_byte; mainFirst: boolean);
 var
+  off1: integer;
+  off2: integer;
   y: integer;
   tx: integer;
+  base1: integer;
+  base2: integer;
   bx: integer;
   vl1: byte;
   vl2: byte;
@@ -299,16 +322,20 @@ var
   ox: integer;
   c: integer;
 begin
+  if mainFirst then off1:= 0 else off1:= 8192;
+  if mainFirst then off2:= 8192 else off2:= 0;
   for y:= 0 to 191 do begin
     tx:= 0;
+    base1:= YPos[y] + off1;
+    base2:= YPos[y] + off2;
     for bx:= 0 to 39 do begin
-      vl1:= img[(YPos[y] + bx) + (IfThen(mainFirst, 0, 8192))];
-      vl2:= img[(YPos[y] + bx) + (IfThen(mainFirst, 8192, 0))];
-      v:= (vl2 shl 8) + vl1;
+      vl1:= (img[__CINC_Post(base1)] and 127);
+      vl2:= (img[__CINC_Post(base2)] and 127);
+      v:= (vl2 shl 7) + vl1;
       for ox:= 0 to 13 do begin
         c:= BWCol[v and 1];
         Self.SetPixel(tx, y, c);
-        if ox = 6 then v:= v shr 2 else v:= v shr 1;
+        v:= v shr 1;
         inc(tx);
       end;
     end;
@@ -317,6 +344,8 @@ end;
 
 procedure TAppleImage.DrawDHRCol(var img: ArrayOf_byte; mainFirst: boolean; solid: boolean);
 var
+  off1: integer;
+  off2: integer;
   y: integer;
   tx: integer;
   base1: integer;
@@ -332,10 +361,12 @@ var
   c: integer;
   i: integer;
 begin
+  if mainFirst then off1:= 0 else off1:= 8192;
+  if mainFirst then off2:= 8192 else off2:= 0;
   for y:= 0 to 191 do begin
     tx:= 0;
-    base1:= YPos[y] + (IfThen(mainFirst, 0, 8192));
-    base2:= YPos[y] + (IfThen(mainFirst, 8192, 0));
+    base1:= YPos[y] + off1;
+    base2:= YPos[y] + off2;
     for bx:= 0 to 19 do begin
       vl1:= (img[__CINC_Post(base1)] and 127);
       vl2:= (img[__CINC_Post(base2)] and 127);
@@ -364,15 +395,9 @@ begin
     mode:= Self.DecodeMode(img[120]);
   end;
   case (mode) of
-    gMode.mdBW: begin
-      Self.DrawHGRBW(img);
-    end;
-    gMode.mdColor: begin
-      Self.DrawHGRCol(img, true);
-    end;
-    gMode.mdMixed: begin
-      Self.DrawHGRCol(img, false);
-    end;
+    gMode.mdBW: Self.DrawHGRBW(img);
+    gMode.mdColor: Self.DrawHGRCol(img, true);
+    gMode.mdMixed: Self.DrawHGRCol(img, false);
   end;
 end;
 
@@ -580,18 +605,10 @@ begin
           Self.SetPixel(XPos, aYPos, (c and mask) xor Self.fgColor);
         end;
         case (Vector) of
-          0: begin
-            dec(aYPos);
-          end;
-          1: begin
-            inc(XPos);
-          end;
-          2: begin
-            inc(aYPos);
-          end;
-          3: begin
-            dec(XPos);
-          end;
+          0: dec(aYPos);
+          1: inc(XPos);
+          2: inc(aYPos);
+          3: dec(XPos);
         end;
       end;
       VByte:= VByte shr 3;

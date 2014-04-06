@@ -15,15 +15,23 @@
 // along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // 
 //  Author :  Enrico Croce
-//  Program: Draw Apple 2 shapes
-//           Show HGR, DHR, GS $C1(PIC) images
-//  Version:  1.0
+//  Library: Draw Apple 2 shapes, HGR, DHR, GS $C1(PIC) images
+//  Version:  1.0.1
 //  Creation Date: 01/09/1996    
-//  Last Modify Date: 05/02/2014
+//  Last Modify Date: 02/04/2014
+//
 //  NOTE:  Rotation not supported, Scaling and collisions supported
+//
+enum gMode {
+  mdAuto, mdBW, mdColor, mdMixed
+}
 
-enum gMode {mdAuto, mdBW, mdColor, mdMixed}
-enum gKind {kdMode1, kdMode2}
+enum gKind {
+  /// MAIN - AUX order
+  kdMode1, 
+  /// AUX - MAIN order
+  kdMode2
+}
 
 class Size {
 
@@ -362,16 +370,20 @@ class AppleImage : AppleGraphic {
   }
   
   public void DrawDHRBW(byte[] img, bool mainFirst) {
+    int off1 = mainFirst ? 0 : 8192;
+    int off2 = mainFirst ? 8192 : 0;
     for (int y = 0; y < 192; y++) {
       int tx = 0;
+      int base1 = YPos[y] + off1;
+      int base2 = YPos[y] + off2;
       for (int bx = 0; bx < 40; bx++) {
-        byte vl1 = img[YPos[y] + bx + (mainFirst ? 0 : 8192)];
-        byte vl2 = img[YPos[y] + bx + (mainFirst ? 8192 : 0)];
-        int v = (vl2 << 8) + vl1;
+        byte vl1 = img[base1++] & 0x7F;
+        byte vl2 = img[base2++] & 0x7F;
+        int v = (vl2 << 7) + vl1;
         for (int ox = 0; ox < 14; ox++) {
           int c = BWCol[v & 1];
           SetPixel(tx, y, c);
-          v >>= (ox==6)? 2 : 1;
+          v >>=  1;
           tx++;
         }
       }
@@ -379,10 +391,12 @@ class AppleImage : AppleGraphic {
   }
   
   public void DrawDHRCol(byte[] img, bool mainFirst, bool solid) {
-    for (int y = 0; y < 192; y++) {
+   int off1 = mainFirst ? 0 : 8192;
+   int off2 = mainFirst ? 8192 : 0;
+   for (int y = 0; y < 192; y++) {
       int tx = 0;
-      int base1 = YPos[y] + (mainFirst ? 0 : 8192);
-      int base2 = YPos[y] + (mainFirst ? 8192 : 0);
+      int base1 = YPos[y] + off1;
+      int base2 = YPos[y] + off2;
       for (int bx = 0; bx < 20; bx++) {
         byte vl1 = img[base1++] & 0x7F;
         byte vl2 = img[base2++] & 0x7F;
