@@ -12,7 +12,7 @@ object fmAbout: TfmAbout
   Font.Height = -11
   Font.Name = 'Tahoma'
   Position = poMainFormCenter
-  LCLVersion = '1.0.14.0'
+  LCLVersion = '1.2.2.0'
   object Label1: TLabel
     Left = 5
     Height = 187
@@ -26,7 +26,6 @@ object fmAbout: TfmAbout
     ParentColor = False
     ParentFont = False
     WordWrap = True
-    OnClick = Label1Click
   end
   object BitBtn1: TBitBtn
     Left = 176

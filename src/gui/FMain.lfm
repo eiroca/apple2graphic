@@ -4,7 +4,7 @@ object fmMain: TfmMain
   Top = 129
   Width = 511
   Caption = 'Apple Graphic'
-  ClientHeight = 316
+  ClientHeight = 336
   ClientWidth = 511
   Color = clBtnFace
   Font.Color = clWindowText
@@ -14,10 +14,10 @@ object fmMain: TfmMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefault
-  LCLVersion = '1.0.14.0'
+  LCLVersion = '1.2.2.0'
   object iImg: TImage
     Left = 0
-    Height = 316
+    Height = 336
     Top = 0
     Width = 511
     Align = alClient
@@ -129,4 +129,4 @@ object fmMain: TfmMain
     left = 160
     top = 208
   end
-end
+end

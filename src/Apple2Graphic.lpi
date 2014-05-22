@@ -89,7 +89,6 @@
         <OverflowChecks Value="True"/>
         <StackChecks Value="True"/>
       </Checks>
-      <VerifyObjMethodCallValidity Value="True"/>
     </CodeGeneration>
     <Linking>
       <Options>

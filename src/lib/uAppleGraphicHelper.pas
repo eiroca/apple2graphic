@@ -19,13 +19,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 unit uAppleGraphicHelper;
 
-{$mode delphi}
-
 interface
 
 uses
-  Classes, SysUtils, Graphics, cAppleGraphic,
-  Controls, StdCtrls, ExtCtrls;
+  Classes, SysUtils, Graphics, cAppleGraphic;
 
 type
 
@@ -56,6 +53,9 @@ type
 implementation
 
 { TAppleGraphicHelper }
+
+const
+  HexStr = '0123456789ABCDEF';
 
 function TAppleGraphicHelper.DecodeGraphic(gr: TAppleGraphic; mx, my: integer): TBitmap;
 var
@@ -224,12 +224,14 @@ end;
 function TAppleGraphicHelper.LoadSprites(Path: string; merge: boolean): integer;
 var
   fin: Text;
-  buf: array[0..8191] of byte;
+  buf: array[0..32 * 1024 - 1] of byte;
   flg: boolean;
-  Widht, Height, Order, PosX, PosY: word;
+  Widht, Height: word;
+  Order: word;
+  PosX, PosY: word;
 begin
   Assign(fin, Path);
-  SetTextBuf(fin, buf, sizeof(buf));
+  SetTextBuf(fin, buf);
   Reset(fin);
   flg := False;
   if not merge then begin
@@ -285,9 +287,6 @@ begin
   Result.SetPosition(PosX, PosY);
 end;
 
-const
-  HexStr = '0123456789ABCDEF';
-
 function TAppleGraphicHelper.ReadByte(var fin: Text; flg: boolean): byte;
 var
   Data: string;
@@ -323,7 +322,8 @@ end;
 procedure TAppleGraphicHelper.SaveSprites(Path: string);
 var
   fout: Text;
-  s, x, y, p: integer;
+  s: integer;
+  x, y, p: integer;
   Sprite: TSprite;
   buffer: ArrayOf_byte;
 begin

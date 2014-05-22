@@ -22,8 +22,9 @@ unit FMain;
 interface
 
 uses
-  uAppleGraphicHelper, Classes, SysUtils, Graphics,
-  Forms, Menus, Controls, StdCtrls, ExtCtrls, Dialogs;
+  Classes, SysUtils, Graphics,
+  Forms, Menus, Controls, ExtCtrls, Dialogs,
+  uAppleGraphicHelper;
 
 type
 
@@ -60,7 +61,7 @@ type
     procedure FormDestroy(Sender: TObject);
     procedure ItemModeClick(Sender: TObject);
     procedure ReorderSpriteClick(Sender: TObject);
-     procedure miSaveClick(Sender: TObject);
+    procedure miSaveClick(Sender: TObject);
     procedure miLoadHGRClick(Sender: TObject);
     procedure miLoadSHRClick(Sender: TObject);
     procedure miLoadDHRClick(Sender: TObject);
@@ -90,13 +91,11 @@ uses
 {$R *.lfm}
 
 procedure TfmMain.FormCreate(Sender: TObject);
-var
-  basePath: string;
 begin
-  GraphicHelper:= TAppleGraphicHelper.Create;
-  ColorConfig:= MenuItemAuto;
-  miReOrderSprite.Enabled:= false;
-  miMergeSprite.Enabled:= false;
+  GraphicHelper := TAppleGraphicHelper.Create;
+  ColorConfig := MenuItemAuto;
+  miReOrderSprite.Enabled := False;
+  miMergeSprite.Enabled := False;
 end;
 
 procedure TfmMain.FormDestroy(Sender: TObject);
@@ -108,10 +107,10 @@ procedure TfmMain.ItemModeClick(Sender: TObject);
 var
   item: TMenuItem;
 begin
-  item:= Sender as TMenuItem;
-  ColorConfig.Checked:= false;
-  ColorConfig:= Item;
-  ColorConfig.Checked:= true;
+  item := Sender as TMenuItem;
+  ColorConfig.Checked := False;
+  ColorConfig := Item;
+  ColorConfig.Checked := True;
 end;
 
 procedure TfmMain.ReorderSpriteClick(Sender: TObject);
@@ -126,7 +125,7 @@ end;
 
 procedure TfmMain.View(img: TBitmap);
 begin
-  miSave.Enabled:= true;
+  miSave.Enabled := True;
   iImg.Picture.Assign(img);
   img.Free;
 end;
@@ -152,7 +151,7 @@ procedure TfmMain.miLoadHGRClick(Sender: TObject);
 begin
   setFilter('HGR Files|*.hgr|All files|*.*');
   if dlOpen.Execute then begin
-     View(GraphicHelper.LoadGraphic(dlOpen.FileName, 1, ColorConfig.Tag));
+    View(GraphicHelper.LoadGraphic(dlOpen.FileName, 1, ColorConfig.Tag));
   end;
 end;
 
@@ -184,9 +183,9 @@ procedure TfmMain.DrawSpriteClick(Sender: TObject);
 begin
   setFilter('Sprite Files|*.spr|All files|*.*');
   if dlOpen.Execute then begin
-     View(GraphicHelper.DrawSprites(dlOpen.FileName, false));
-     miReOrderSprite.Enabled:= true;
-     miMergeSprite.Enabled:= true;
+    View(GraphicHelper.DrawSprites(dlOpen.FileName, False));
+    miReOrderSprite.Enabled := True;
+    miMergeSprite.Enabled := True;
   end;
 end;
 
@@ -194,9 +193,9 @@ procedure TfmMain.MergespriteClick(Sender: TObject);
 begin
   setFilter('Sprite Files|*.spr|All files|*.*');
   if dlOpen.Execute then begin
-     miSave.Enabled:= true;
-     View(GraphicHelper.DrawSprites(dlOpen.FileName, true));
+    miSave.Enabled := True;
+    View(GraphicHelper.DrawSprites(dlOpen.FileName, True));
   end;
 end;
 
-end.
+end.

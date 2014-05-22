@@ -31,7 +31,6 @@ type
   TfmAbout = class(TForm)
     BitBtn1: TBitBtn;
     Label1: TLabel;
-    procedure Label1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -55,11 +54,6 @@ begin
   finally
     fmAbout.Free;
   end;
-end;
-
-procedure TfmAbout.Label1Click(Sender: TObject);
-begin
-
 end;
 
 { TfmAbout }
