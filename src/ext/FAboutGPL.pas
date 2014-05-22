@@ -47,9 +47,9 @@ procedure AboutGPL(me: string);
 var
   fmAbout: TfmAbout;
 begin
-  fmAbout:= TfmAbout.Create(nil);
+  fmAbout := TfmAbout.Create(nil);
   try
-    fmAbout.Caption:= 'About - '+me;
+    fmAbout.Caption := 'About - ' + me;
     fmAbout.ShowModal;
   finally
     fmAbout.Free;
