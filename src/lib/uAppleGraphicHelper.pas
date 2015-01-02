@@ -1,5 +1,5 @@
 (* GPL > 3.0
-Copyright (C) 1996-2014 eIrOcA Enrico Croce & Simona Burzio
+Copyright (C) 1996-2015 eIrOcA Enrico Croce & Simona Burzio
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -99,15 +99,12 @@ procedure TAppleGraphicHelper.LoadFile(aFileName: string; out Data: ArrayOf_byte
 var
   fl: TFileStream;
   siz: integer;
-  i: integer;
 begin
   fl := TFileStream.Create(aFileName, fmOpenRead);
   try
     siz := fl.Size;
     SetLength(Data, siz);
-    for i := 0 to siz - 1 do begin
-      Data[i] := fl.ReadByte;
-    end;
+    fl.ReadBuffer(Data[0], siz);
   finally
     FreeAndNil(fl);
   end;
@@ -221,10 +218,13 @@ begin
   Result := DecodeGraphic(AppleSprite, 1, 1);
 end;
 
+const
+  BUFFER_SIZE = 32 *1024;
+
 function TAppleGraphicHelper.LoadSprites(Path: string; merge: boolean): integer;
 var
   fin: Text;
-  buf: array[0..32 * 1024 - 1] of byte;
+  buf: array[0..BUFFER_SIZE-1] of byte;
   flg: boolean;
   Widht, Height: word;
   Order: word;

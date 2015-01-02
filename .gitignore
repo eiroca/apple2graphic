@@ -1,3 +1,4 @@
 bin
 src/backup
 src/ext/backup
+*.bak

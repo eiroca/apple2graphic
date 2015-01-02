@@ -12,7 +12,7 @@ object fmAbout: TfmAbout
   Font.Height = -11
   Font.Name = 'Tahoma'
   Position = poMainFormCenter
-  LCLVersion = '1.2.2.0'
+  LCLVersion = '1.2.6.0'
   object Label1: TLabel
     Left = 5
     Height = 187
