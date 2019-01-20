@@ -1,4 +1,4 @@
-# apple2graphic
+# Apple ][ graphic
 
 Programs and library to draw old Apple ][ graphics formats.
 
