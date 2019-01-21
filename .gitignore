@@ -1,4 +1,3 @@
-bin
-src/backup
-src/ext/backup
+**/backup/*
 *.bak
+**/Thumbs.db

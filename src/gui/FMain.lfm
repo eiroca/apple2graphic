@@ -1,31 +1,31 @@
 object fmMain: TfmMain
   Left = 255
-  Height = 336
+  Height = 300
   Top = 129
-  Width = 511
+  Width = 580
   Caption = 'Apple Graphic'
-  ClientHeight = 336
-  ClientWidth = 511
+  ClientHeight = 280
+  ClientWidth = 580
   Color = clBtnFace
   Font.Color = clWindowText
   Font.Height = -11
   Font.Name = 'Tahoma'
-  Menu = MainMenu1
+  Menu = mMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
   Position = poDefault
-  LCLVersion = '1.2.6.0'
+  LCLVersion = '1.8.4.0'
   object iImg: TImage
     Left = 0
-    Height = 336
+    Height = 280
     Top = 0
-    Width = 511
+    Width = 580
     Align = alClient
     AutoSize = True
   end
-  object MainMenu1: TMainMenu
-    left = 56
-    top = 112
+  object mMain: TMainMenu
+    left = 48
+    top = 24
     object File1: TMenuItem
       Caption = '&File'
       object miSave: TMenuItem
@@ -122,11 +122,11 @@ object fmMain: TfmMain
     DefaultExt = '.png'
     Filter = 'PNG|*.png|Bitmap|*.bmp'
     Options = [ofOverwritePrompt, ofEnableSizing, ofViewDetail]
-    left = 56
-    top = 208
+    left = 128
+    top = 24
   end
   object dlOpen: TOpenDialog
-    left = 160
-    top = 208
+    left = 200
+    top = 24
   end
-end
+end

@@ -27,6 +27,7 @@ uses
 {$R *.res}
 
 begin
+  Application.Scaled:=True;
   Application.Initialize;
   Application.CreateForm(TfmMain, fmMain);
   Application.Run;

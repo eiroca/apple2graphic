@@ -1,5 +1,5 @@
 (* GPL > 3.0
-Copyright (C) 1996-2015 eIrOcA Enrico Croce & Simona Burzio
+Copyright (C) 1996-2019 eIrOcA Enrico Croce & Simona Burzio
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -32,7 +32,7 @@ type
 
   TfmMain = class(TForm)
     iImg: TImage;
-    MainMenu1: TMainMenu;
+    mMain: TMainMenu;
     File1: TMenuItem;
     MenuItem1: TMenuItem;
     MenuItem2: TMenuItem;
@@ -198,4 +198,4 @@ begin
   end;
 end;
 
-end.
+end.
