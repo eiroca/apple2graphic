@@ -1,16 +1,13 @@
 object fmAbout: TfmAbout
-  Left = 410
+  Left = 478
   Height = 234
-  Top = 211
+  Top = 229
   Width = 413
+  ActiveControl = BitBtn1
   BorderStyle = bsDialog
   Caption = 'About'
   ClientHeight = 234
   ClientWidth = 413
-  Color = clBtnFace
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
   Position = poMainFormCenter
   LCLVersion = '1.8.4.0'
   object Label1: TLabel

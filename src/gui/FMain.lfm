@@ -1,25 +1,21 @@
 object fmMain: TfmMain
-  Left = 255
-  Height = 300
-  Top = 129
-  Width = 580
+  Left = 250
+  Height = 400
+  Top = 150
+  Width = 560
   Caption = 'Apple Graphic'
-  ClientHeight = 280
-  ClientWidth = 580
-  Color = clBtnFace
-  Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  ClientHeight = 400
+  ClientWidth = 560
   Menu = mMain
   OnCreate = FormCreate
   OnDestroy = FormDestroy
-  Position = poDefault
+  Position = poDesktopCenter
   LCLVersion = '1.8.4.0'
   object iImg: TImage
     Left = 0
-    Height = 280
+    Height = 400
     Top = 0
-    Width = 580
+    Width = 560
     Align = alClient
     AutoSize = True
   end

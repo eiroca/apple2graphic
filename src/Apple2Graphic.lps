@@ -2,8 +2,8 @@
 <CONFIG>
   <ProjectSession>
     <Version Value="10"/>
-    <BuildModes Active="Default"/>
-    <Units Count="8">
+    <BuildModes Active="MacOS"/>
+    <Units Count="9">
       <Unit0>
         <Filename Value="Apple2Graphic.lpr"/>
         <IsPartOfProject Value="True"/>
@@ -20,7 +20,7 @@
         <ResourceBaseClass Value="Form"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="81"/>
-        <CursorPos X="5" Y="111"/>
+        <CursorPos X="20" Y="88"/>
         <UsageCount Value="224"/>
         <Loaded Value="True"/>
         <LoadedDesigner Value="True"/>
@@ -32,30 +32,26 @@
         <ComponentName Value="fmAbout"/>
         <HasResources Value="True"/>
         <ResourceBaseClass Value="Form"/>
-        <EditorIndex Value="1"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="19"/>
         <CursorPos X="27" Y="31"/>
         <UsageCount Value="224"/>
-        <Loaded Value="True"/>
-        <LoadedDesigner Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit2>
       <Unit3>
         <Filename Value="Ci/cAppleGraphic.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="-1"/>
         <TopLine Value="847"/>
         <CursorPos X="14" Y="12"/>
         <UsageCount Value="224"/>
-        <Loaded Value="True"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit3>
       <Unit4>
         <Filename Value="lib/uAppleGraphicHelper.pas"/>
         <IsPartOfProject Value="True"/>
-        <EditorIndex Value="3"/>
-        <UsageCount Value="131"/>
-        <Loaded Value="True"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="132"/>
         <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit4>
       <Unit5>
@@ -67,8 +63,9 @@
       </Unit5>
       <Unit6>
         <Filename Value="ext/FAboutGPL.lfm"/>
-        <CursorPos X="14" Y="5"/>
-        <UsageCount Value="1"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="44" Y="6"/>
+        <UsageCount Value="10"/>
         <DefaultSyntaxHighlighter Value="LFM"/>
       </Unit6>
       <Unit7>
@@ -76,10 +73,17 @@
         <TopLine Value="173"/>
         <CursorPos X="5" Y="173"/>
         <UsageCount Value="6"/>
-        <DefaultSyntaxHighlighter Value="Delphi"/>
       </Unit7>
+      <Unit8>
+        <Filename Value="gui/FMain.lfm"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="4"/>
+        <CursorPos X="12" Y="4"/>
+        <UsageCount Value="10"/>
+        <DefaultSyntaxHighlighter Value="LFM"/>
+      </Unit8>
     </Units>
-    <JumpHistory Count="8" HistoryIndex="7">
+    <JumpHistory Count="5" HistoryIndex="4">
       <Position1>
         <Filename Value="gui/FMain.pas"/>
         <Caret Line="123" TopLine="101"/>
@@ -97,21 +101,9 @@
         <Caret Line="201" Column="5" TopLine="171"/>
       </Position4>
       <Position5>
-        <Filename Value="lib/uAppleGraphicHelper.pas"/>
-        <Caret Line="160" Column="78" TopLine="150"/>
-      </Position5>
-      <Position6>
-        <Filename Value="lib/uAppleGraphicHelper.pas"/>
-        <Caret Line="135" TopLine="134"/>
-      </Position6>
-      <Position7>
-        <Filename Value="lib/uAppleGraphicHelper.pas"/>
-        <Caret Line="350" Column="5" TopLine="320"/>
-      </Position7>
-      <Position8>
         <Filename Value="gui/FMain.pas"/>
         <Caret Line="23" Column="63"/>
-      </Position8>
+      </Position5>
     </JumpHistory>
   </ProjectSession>
   <Debugging>

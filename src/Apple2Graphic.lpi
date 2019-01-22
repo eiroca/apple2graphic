@@ -17,6 +17,7 @@
       <XPManifest>
         <DpiAware Value="True"/>
         <TextName Value="net.eiroca.Apple2Graphic"/>
+        <TextDesc Value="Apple ][ graphics converter"/>
       </XPManifest>
       <Icon Value="0"/>
     </General>
@@ -30,7 +31,7 @@
       <RevisionNr Value="1"/>
       <StringTable ProductVersion="0.0.0.0"/>
     </VersionInfo>
-    <BuildModes Count="3">
+    <BuildModes Count="4">
       <Item1 Name="Default" Default="True"/>
       <Item2 Name="Debug">
         <CompilerOptions>
@@ -108,6 +109,47 @@
           </Linking>
         </CompilerOptions>
       </Item3>
+      <Item4 Name="MacOS">
+        <MacroValues Count="1">
+          <Macro1 Name="LCLWidgetType" Value="cocoa"/>
+        </MacroValues>
+        <CompilerOptions>
+          <Version Value="11"/>
+          <Target>
+            <Filename Value="$Env(BUILD_PATH)Apple2Graphic/$(BuildMode)/Apple2Graphic"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="gui;lib;ext;$(ProjOutDir)"/>
+            <OtherUnitFiles Value="gui;ext;Ci;lib"/>
+            <UnitOutputDirectory Value="$Env(BUILD_PATH)Apple2Graphic/$(BuildMode)/units-$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <SyntaxMode Value="Delphi"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
+          </Linking>
+        </CompilerOptions>
+      </Item4>
+      <SharedMatrixOptions Count="1">
+        <Item1 ID="509485871511" Modes="MacOS" Type="IDEMacro" MacroName="LCLWidgetType" Value="cocoa"/>
+      </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
