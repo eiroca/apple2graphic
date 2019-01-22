@@ -11,4 +11,4 @@ Support also for apple shapes.
 * Dependency : -
 * Version    : 1.1.1
 
-[More information at official site] (https://www.eiroca.net/apple2graphic)
+[More information at official site](https://www.eiroca.net/apple2graphic)
