@@ -1,4 +1,4 @@
-# Apple ][ graphic
+# Apple \]\[ graphic
 
 Programs and library to draw Apple \]\[ graphics formats.
 
