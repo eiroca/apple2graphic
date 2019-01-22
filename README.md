@@ -1,6 +1,6 @@
 # Apple ][ graphic
 
-Programs and library to draw Apple ][ graphics formats.
+Programs and library to draw Apple \]\[ graphics formats.
 
 Support for HGR, DHGR and Apple IIgs SHR ($C1, PIC) format with export to BMP and PNG.
 Support also for apple shapes.
