@@ -1,23 +1,23 @@
 object fmAbout: TfmAbout
   Left = 478
-  Height = 234
+  Height = 264
   Top = 229
   Width = 413
   ActiveControl = BitBtn1
   BorderStyle = bsDialog
   Caption = 'About'
-  ClientHeight = 234
+  ClientHeight = 264
   ClientWidth = 413
   Position = poMainFormCenter
   LCLVersion = '1.8.4.0'
   object Label1: TLabel
     Left = 5
-    Height = 187
+    Height = 219
     Top = 5
     Width = 400
     Alignment = taCenter
     AutoSize = False
-    Caption = 'Copyright (C) 1996-2019 eIrOcA Enrico Croce && Simona Burzio  This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.  You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.'
+    Caption = 'Copyright (C) 1996-2019 eIrOcA Enrico Croce && Simona Burzio'#13#10#13#10'This program is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.  '#13#10#13#10'This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  '#13#10#13#10'See the GNU General Public License for more details.  You should have received a copy of the GNU General Public License along with this program.  If not, see <http://www.gnu.org/licenses/>.'
     Font.Color = clWindowText
     Font.Height = -12
     ParentColor = False
@@ -27,7 +27,7 @@ object fmAbout: TfmAbout
   object BitBtn1: TBitBtn
     Left = 176
     Height = 25
-    Top = 200
+    Top = 232
     Width = 72
     Default = True
     DefaultCaption = True
