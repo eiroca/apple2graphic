@@ -19,16 +19,17 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 *)
 unit FAboutGPL;
 
+{$IFDEF FPC}
+  {$MODE DELPHI}{$H+}
+{$ENDIF}
+
 interface
 
 uses
-  SysUtils, Classes, LCLIntf, LCLType, Forms, Controls, StdCtrls, Buttons;
+  SysUtils, Classes,  Forms, Controls, StdCtrls, Buttons;
 
 type
-
-  { TfmAbout }
-
-  TfmAbout = class(TForm)
+  TfmAboutGPL = class(TForm)
     BitBtn1: TBitBtn;
     Label1: TLabel;
   private
@@ -41,25 +42,23 @@ procedure AboutGPL(me: string);
 
 implementation
 
-{$R *.lfm}
+{$IFDEF FPC}
+  {$R *.LFM}
+{$ELSE}
+  {$R *.DFM}
+{$ENDIF}
 
 procedure AboutGPL(me: string);
 var
-  fmAbout: TfmAbout;
+  fmAbout: TfmAboutGPL;
 begin
-  fmAbout := TfmAbout.Create(nil);
+  fmAbout:= TfmAboutGPL.Create(nil);
   try
-    fmAbout.Caption := 'About - ' + me;
+    fmAbout.Caption:= 'About - ' + me;
     fmAbout.ShowModal;
   finally
     fmAbout.Free;
   end;
 end;
 
-{ TfmAbout }
-
-
-{ TfmAbout }
-
 end.
-
